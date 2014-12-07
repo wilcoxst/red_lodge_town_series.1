@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :weeks
+
   resources :racers
 
   resources :teams
