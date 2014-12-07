@@ -1,4 +1,5 @@
 ActiveAdmin.register TimeEntry do
+  permit_params :timing, :run
 
 
   # See permitted parameters documentation:
