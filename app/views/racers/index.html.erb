@@ -1,0 +1,33 @@
+<h1>Listing racers</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Gender</th>
+      <th>Team</th>
+      <th>Discipline</th>
+      <th>Classification</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @racers.each do |racer| %>
+      <tr>
+        <td><%= racer.name %></td>
+        <td><%= racer.gender %></td>
+        <td><%= racer.team %></td>
+        <td><%= racer.discipline %></td>
+        <td><%= racer.classification %></td>
+        <td><%= link_to 'Show', racer %></td>
+        <td><%= link_to 'Edit', edit_racer_path(racer) %></td>
+        <td><%= link_to 'Destroy', racer, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Racer', new_racer_path %>

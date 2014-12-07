@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @racer.name %>
+</p>
+
+<p>
+  <strong>Gender:</strong>
+  <%= @racer.gender %>
+</p>
+
+<p>
+  <strong>Team:</strong>
+  <%= @racer.team %>
+</p>
+
+<p>
+  <strong>Discipline:</strong>
+  <%= @racer.discipline %>
+</p>
+
+<p>
+  <strong>Classification:</strong>
+  <%= @racer.classification %>
+</p>
+
+<%= link_to 'Edit', edit_racer_path(@racer) %> |
+<%= link_to 'Back', racers_path %>
