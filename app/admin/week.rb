@@ -1,4 +1,5 @@
 ActiveAdmin.register Week do
+  permit_params :number
 
 
   # See permitted parameters documentation:
