@@ -1,4 +1,5 @@
 ActiveAdmin.register Racer do
+  permit_params :name, :gender
 
 
   # See permitted parameters documentation:
