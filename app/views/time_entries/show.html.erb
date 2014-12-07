@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Timing:</strong>
+  <%= @time_entry.timing %>
+</p>
+
+<p>
+  <strong>Run:</strong>
+  <%= @time_entry.run %>
+</p>
+
+<p>
+  <strong>Week:</strong>
+  <%= @time_entry.week %>
+</p>
+
+<p>
+  <strong>Racer:</strong>
+  <%= @time_entry.racer %>
+</p>
+
+<%= link_to 'Edit', edit_time_entry_path(@time_entry) %> |
+<%= link_to 'Back', time_entries_path %>

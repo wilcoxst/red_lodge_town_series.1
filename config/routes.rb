@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :time_entries
+
   resources :weeks
 
   resources :racers
