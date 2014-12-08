@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141207003934) do
+ActiveRecord::Schema.define(version: 20141207004005) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -45,5 +45,55 @@ ActiveRecord::Schema.define(version: 20141207003934) do
 
   add_index "admin_users", ["email"], name: "index_admin_users_on_email", unique: true
   add_index "admin_users", ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
+
+  create_table "classifications", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "disciplines", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "racers", force: true do |t|
+    t.string   "name"
+    t.string   "gender"
+    t.integer  "team_id"
+    t.integer  "discipline_id"
+    t.integer  "classification_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "racers", ["classification_id"], name: "index_racers_on_classification_id"
+  add_index "racers", ["discipline_id"], name: "index_racers_on_discipline_id"
+  add_index "racers", ["team_id"], name: "index_racers_on_team_id"
+
+  create_table "teams", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "time_entries", force: true do |t|
+    t.decimal  "timing"
+    t.integer  "run"
+    t.integer  "week_id"
+    t.integer  "racer_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "time_entries", ["racer_id"], name: "index_time_entries_on_racer_id"
+  add_index "time_entries", ["week_id"], name: "index_time_entries_on_week_id"
+
+  create_table "weeks", force: true do |t|
+    t.integer  "number"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end
