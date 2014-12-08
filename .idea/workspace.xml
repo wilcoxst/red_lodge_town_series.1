@@ -2,36 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a99792c8-782a-4236-adb8-512a16bfc133" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/assets/images/rl-logo.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/red_lodge_town_series.1.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/scopes/scope_settings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/bundle/bin/bourbon" afterPath="$PROJECT_DIR$/vendor/bundle/bin/bourbon" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/bundle/bin/cucumber" afterPath="$PROJECT_DIR$/vendor/bundle/bin/cucumber" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/bundle/bin/erubis" afterPath="$PROJECT_DIR$/vendor/bundle/bin/erubis" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/bundle/bin/htmldiff" afterPath="$PROJECT_DIR$/vendor/bundle/bin/htmldiff" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/bundle/bin/ldiff" afterPath="$PROJECT_DIR$/vendor/bundle/bin/ldiff" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/bundle/bin/nokogiri" afterPath="$PROJECT_DIR$/vendor/bundle/bin/nokogiri" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/bundle/bin/rackup" afterPath="$PROJECT_DIR$/vendor/bundle/bin/rackup" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/bundle/bin/rails" afterPath="$PROJECT_DIR$/vendor/bundle/bin/rails" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/bundle/bin/rake" afterPath="$PROJECT_DIR$/vendor/bundle/bin/rake" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/bundle/bin/rdoc" afterPath="$PROJECT_DIR$/vendor/bundle/bin/rdoc" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/bundle/bin/ri" afterPath="$PROJECT_DIR$/vendor/bundle/bin/ri" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/bundle/bin/rspec" afterPath="$PROJECT_DIR$/vendor/bundle/bin/rspec" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/bundle/bin/sass-convert" afterPath="$PROJECT_DIR$/vendor/bundle/bin/sass-convert" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/bundle/bin/sass" afterPath="$PROJECT_DIR$/vendor/bundle/bin/sass" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/bundle/bin/scss" afterPath="$PROJECT_DIR$/vendor/bundle/bin/scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/bundle/bin/sdoc-merge" afterPath="$PROJECT_DIR$/vendor/bundle/bin/sdoc-merge" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/bundle/bin/sdoc" afterPath="$PROJECT_DIR$/vendor/bundle/bin/sdoc" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/bundle/bin/setup" afterPath="$PROJECT_DIR$/vendor/bundle/bin/setup" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/bundle/bin/spring" afterPath="$PROJECT_DIR$/vendor/bundle/bin/spring" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/bundle/bin/sprockets" afterPath="$PROJECT_DIR$/vendor/bundle/bin/sprockets" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/bundle/bin/thor" afterPath="$PROJECT_DIR$/vendor/bundle/bin/thor" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/bundle/bin/tilt" afterPath="$PROJECT_DIR$/vendor/bundle/bin/tilt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/bundle/bin/tt" afterPath="$PROJECT_DIR$/vendor/bundle/bin/tt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/bundle/bundler/gems/active_admin-5af560b2b6cd" afterPath="$PROJECT_DIR$/vendor/bundle/bundler/gems/active_admin-5af560b2b6cd" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/bundle/bundler/gems/bootstrap-sass-d3531a6fded0" afterPath="$PROJECT_DIR$/vendor/bundle/bundler/gems/bootstrap-sass-d3531a6fded0" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/bundle/bundler/gems/devise-a9d90503e903" afterPath="$PROJECT_DIR$/vendor/bundle/bundler/gems/devise-a9d90503e903" />
     </list>
     <ignored path="red_lodge_town_series.1.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -301,9 +274,9 @@
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25506938" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25506938" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32896066" sideWeight="0.49928367" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32896066" sideWeight="0.49928367" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32896066" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
