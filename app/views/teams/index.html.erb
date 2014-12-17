@@ -5,32 +5,23 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th>ID</th>
-      <th><%= model_class.human_attribute_name(:name) %></th>
-      <th><%= model_class.human_attribute_name(:created_at) %></th>
-      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+      <th>Team Name</th>
+      <th>Racer Name</th>
     </tr>
   </thead>
   <tbody>
     <% @teams.each do |team| %>
       <tr>
-        <td><%= team.id %></td>
         <td><%= team.name %></td>
-        <td><%=l team.created_at, format: :long %></td>
-        <td>
-          <%= link_to team_path(team), :class => 'btn btn-xs', :title => "#{ t('.show', :default => t('helpers.links.show')) }" do %>
-            <%= glyph 'info-sign' %>
-            <%= glyph 'pencil' %>
-          <%- end -%>
-          <%= link_to team_path(team), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-xs', :title => "#{ t('.destroy', :default => t('helpers.links.destroy')) }" do %>
-            <%= glyph 'remove' %>
-          <%- end -%>
-        </td>
       </tr>
+
+      <% team.racers.each do |racer| %>
+          <tr>
+            <td />
+            <td><%= racer.name %></td>
+          </tr>
+      <% end %>
     <% end %>
   </tbody>
 </table>
 
-<%= link_to t('.new', :default => t("helpers.links.new")),
-            new_team_path,
-            :class => 'btn btn-primary' %>

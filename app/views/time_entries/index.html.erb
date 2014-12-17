@@ -6,8 +6,8 @@
   <thead>
     <tr>
       <th>ID</th>
-      <th><%= model_class.human_attribute_name(:timing) %></th>
-      <th><%= model_class.human_attribute_name(:run) %></th>
+      <th><%= model_class.human_attribute_name(:run1) %></th>
+      <th><%= model_class.human_attribute_name(:run2) %></th>
       <th><%= model_class.human_attribute_name(:created_at) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
@@ -16,8 +16,8 @@
     <% @time_entries.each do |time_entry| %>
       <tr>
         <td><%= time_entry.id %></td>
-        <td><%= time_entry.timing %></td>
-        <td><%= time_entry.run %></td>
+        <td><%= time_entry.run1 %></td>
+        <td><%= time_entry.run2 %></td>
         <td><%=l time_entry.created_at, format: :long %></td>
         <td>
           <%= link_to time_entry_path(time_entry), :class => 'btn btn-xs', :title => "#{ t('.show', :default => t('helpers.links.show')) }" do %>

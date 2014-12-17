@@ -1,5 +1,6 @@
 ActiveAdmin.register Classification do
   permit_params :name
+  config.sort_order = "id_asc"
 
 
   # See permitted parameters documentation:

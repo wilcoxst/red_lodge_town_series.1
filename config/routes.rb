@@ -9,6 +9,12 @@ Rails.application.routes.draw do
 
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
+
+  get 'results' => 'results#index'
+  get 'points' => 'results#points'
+  get 'individual_results' => 'results#individual_results'
+
+  root 'results#points'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

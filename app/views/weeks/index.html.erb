@@ -6,7 +6,7 @@
   <thead>
     <tr>
       <th>ID</th>
-      <th><%= model_class.human_attribute_name(:number) %></th>
+      <th><%= model_class.human_attribute_name(:name) %></th>
       <th><%= model_class.human_attribute_name(:created_at) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
@@ -15,7 +15,7 @@
     <% @weeks.each do |week| %>
       <tr>
         <td><%= week.id %></td>
-        <td><%= week.number %></td>
+        <td><%= week.name %></td>
         <td><%=l week.created_at, format: :long %></td>
         <td>
           <%= link_to week_path(week), :class => 'btn btn-xs', :title => "#{ t('.show', :default => t('helpers.links.show')) }" do %>

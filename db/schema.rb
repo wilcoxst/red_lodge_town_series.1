@@ -79,8 +79,8 @@ ActiveRecord::Schema.define(version: 20141207004005) do
   end
 
   create_table "time_entries", force: true do |t|
-    t.decimal  "timing"
-    t.integer  "run"
+    t.decimal  "run1"
+    t.decimal  "run2"
     t.integer  "week_id"
     t.integer  "racer_id"
     t.datetime "created_at"
@@ -88,10 +88,12 @@ ActiveRecord::Schema.define(version: 20141207004005) do
   end
 
   add_index "time_entries", ["racer_id"], name: "index_time_entries_on_racer_id"
+  add_index "time_entries", ["week_id", "racer_id"], name: "index_time_entries_on_week_id_and_racer_id", unique: true
   add_index "time_entries", ["week_id"], name: "index_time_entries_on_week_id"
 
   create_table "weeks", force: true do |t|
-    t.integer  "number"
+    t.integer  "name"
+    t.date     "date"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

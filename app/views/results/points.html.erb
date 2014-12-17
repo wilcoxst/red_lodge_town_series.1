@@ -1,37 +1,64 @@
 <div class="page-header">
-  <h1>Results</h1>
+  <h1>Points</h1>
 </div>
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th><%= Racer.human_attribute_name(:name) %></th>
-      <th><%= Racer.human_attribute_name(:gender) %></th>
-      <th><%= Racer.human_attribute_name(:created_at) %></th>
-      <th><%=t '.actions', :default => t("helpers.actions") %></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @racers.each do |racer| %>
-      <tr>
-        <td><%= racer.id %></td>
-        <td><%= racer.name %></td>
-        <td><%= racer.gender %></td>
-        <td><%=l racer.created_at, format: :long %></td>
-        <td>
-          <%= link_to racer_path(racer), :class => 'btn btn-xs', :title => "#{ t('.show', :default => t('helpers.links.show')) }" do %>
-            <%= glyph 'info-sign' %>
-            <%= glyph 'pencil' %>
-          <%- end -%>
-          <%= link_to racer_path(racer), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-xs', :title => "#{ t('.destroy', :default => t('helpers.links.destroy')) }" do %>
-            <%= glyph 'remove' %>
-          <%- end -%>
-        </td>
-      </tr>
+<% @results.keys.each do |gender| %>
+    <h2><%= Racer.full_gender gender %></h2>
+    <% @results[gender].keys.each do |discipline| %>
+        <h3><%= discipline %></h3>
+        <% @results[gender][discipline].keys.each do |classification| %>
+            <h4>Class <%= classification %></h4>
+            <table class="table table-striped">
+              <thead>
+              <tr>
+                <% weeks = @results[gender][discipline][classification].keys %>
+                <% weeks.each do |week| %>
+                    <th colspan="5">Week <%= week %></th>
+                <% end %>
+                <th colspan="2">Total Points</th>
+              </tr>
+              <tr>
+                <% weeks.each do %>
+                    <th>Racer</th>
+                    <th>Run 1</th>
+                    <th>Run 2</th>
+                    <th>Combined</th>
+                    <th>Points</th>
+                <% end %>
+                <th>Racer</th>
+                <th>Points</th>
+              </tr>
+              </thead>
+              <tbody>
+              <% racer_names = @results[gender][discipline][classification][weeks[0]].map {|time_entry| time_entry.racer.name} %>
+              <% racer_names = racer_names.sort_by {|name| @total_points[name]} %>
+              <% num_racers = @results[gender][discipline][classification][weeks[0]].size %>
+              <% for i in 0..(num_racers-1) %>
+                  <tr>
+                  <% weeks.each do |week| %>
+                      <% time_entry =  @results[gender][discipline][classification][week][i] %>
+                        <td>
+                          <%= time_entry.racer.name %>
+                        </td>
+                        <td>
+                          <%= time_entry.run1 %>
+                        </td>
+                        <td>
+                          <%= time_entry.run2 %>
+                        </td>
+                        <td>
+                          <%= time_entry.combined %>
+                        </td>
+                        <td>
+                          <%= time_entry.get_points() %>
+                        </td>
+                  <% end %>
+                    <td><%= racer_names[i] %></td>
+                    <td><%= @total_points[racer_names[i]] %></td>
+                  </tr>
+              <% end %>
+              </tbody>
+            </table>
+        <% end %>
     <% end %>
-  </tbody>
-</table>
+<% end %>
 
-<%= link_to t('.new', :default => t("helpers.links.new")),
-            new_racer_path,
-            :class => 'btn btn-primary' %>
