@@ -10,15 +10,16 @@
             <table class="table table-striped">
               <thead>
               <tr>
+                <th />
                 <% weeks = @results[gender][discipline][classification].keys %>
                 <% weeks.each do |week| %>
-                    <th colspan="5">Week <%= week %></th>
+                    <th colspan="4">Week <%= week %></th>
                 <% end %>
                 <th colspan="2">Total Points</th>
               </tr>
               <tr>
+                <th>Racer</th>
                 <% weeks.each do %>
-                    <th>Racer</th>
                     <th>Run 1</th>
                     <th>Run 2</th>
                     <th>Combined</th>
@@ -30,30 +31,19 @@
               </thead>
               <tbody>
               <% racer_names = @results[gender][discipline][classification][weeks[0]].map {|time_entry| time_entry.racer.name} %>
-              <% racer_names = racer_names.sort_by {|name| @total_points[name]} %>
-              <% num_racers = @results[gender][discipline][classification][weeks[0]].size %>
-              <% for i in 0..(num_racers-1) %>
+              <% racer_names.sort_by! {|name| @total_points[name]} %>
+              <% racer_names.each do |name| %>
                   <tr>
-                  <% weeks.each do |week| %>
-                      <% time_entry =  @results[gender][discipline][classification][week][i] %>
-                        <td>
-                          <%= time_entry.racer.name %>
-                        </td>
-                        <td>
-                          <%= time_entry.run1 %>
-                        </td>
-                        <td>
-                          <%= time_entry.run2 %>
-                        </td>
-                        <td>
-                          <%= time_entry.combined %>
-                        </td>
-                        <td>
-                          <%= time_entry.get_points() %>
-                        </td>
-                  <% end %>
-                    <td><%= racer_names[i] %></td>
-                    <td><%= @total_points[racer_names[i]] %></td>
+                    <td><%= name %></td>
+                    <% weeks.each do |week| %>
+                        <% time_entry =  @racer_weekly_entries[name][week] %>
+                        <td><%= time_entry.run1 %></td>
+                        <td><%= time_entry.run2 %></td>
+                        <td><%= time_entry.combined %></td>
+                        <td><%= time_entry.get_points() %></td>
+                    <% end %>
+                    <td><%= name %></td>
+                    <td><%= @total_points[name] %></td>
                   </tr>
               <% end %>
               </tbody>

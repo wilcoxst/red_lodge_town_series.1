@@ -4,9 +4,9 @@ class TimeEntry < ActiveRecord::Base
 
 
   def self.getSet(gender, discipline, classification, week)
-    set = TimeEntry.joins(:racer).where({racers: {gender: gender, discipline_id: discipline.id, classification_id: classification.id}, time_entries: {week_id: week.id}}).sort_by { |time_entry| time_entry.combined }
-    i = 0
-    while i < set.size
+    set = TimeEntry.joins(:racer).where({racers: {gender: gender, discipline_id: discipline.id, classification_id: classification.id},
+                                         time_entries: {week_id: week.id}}).sort_by { |time_entry| time_entry.combined }
+    set.each_with_index do |time_entry, i|
       time_entry = set[i]
       time_entry.set_points i+1
 
@@ -17,8 +17,6 @@ class TimeEntry < ActiveRecord::Base
           time_entry.set_points(previous_time_entry.get_points)
         end
       end
-      #puts time_entry.racer.name + ' combined: ' + time_entry.combined.to_s + ' points: ' + time_entry.get_points.to_s
-      i+=1
     end
     set
   end
@@ -33,6 +31,15 @@ class TimeEntry < ActiveRecord::Base
 
   def get_points
     @points
+  end
+
+
+  def exclude_from_team
+    @excluded_from_team = true
+  end
+
+  def is_excluded_from_team?
+    not @excluded_from_team.nil?
   end
 
 end

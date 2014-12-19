@@ -1,0 +1,54 @@
+<div class="page-header">
+  <h1>Team Results</h1>
+</div>
+
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th>Team</th>
+    <th>Racer</th>
+    <% @week_names.each do |week| %>
+        <th>Week <%= week %></th>
+    <% end %>
+    <th>Total Points</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @team_names.each do |team_name| %>
+      <tr>
+        <td><b><%= team_name %></b></td>
+        <td />
+
+        <% @week_names.each do |week| %>
+            <td><b>
+              <%= @team_weekly_totals[team_name][week] %>
+            </b></td>
+        <% end %>
+        <td><b><%= @team_totals[team_name] %></b></td>
+
+      </tr>
+
+      <% racer_names = @team_racer_names[team_name] %>
+      <% racer_names.each do |racer_name| %>
+          <tr>
+            <td />
+            <td><%= racer_name %></td>
+            <% @week_names.each do |week| %>
+                <td>
+                  <% time_entry = @team_week_racer_entries[team_name][week][racer_name] %>
+                  <% if time_entry.is_excluded_from_team? %>
+                      <strike><%= time_entry.get_points %></strike>
+                  <% else %>
+                      <%= time_entry.get_points %>
+                  <% end %>
+                </td>
+            <% end %>
+            <td />
+      <% end %>
+      </tr>
+
+  <% end %>
+  </tbody>
+</table>
+
