@@ -10,23 +10,13 @@
             <table class="table table-striped">
               <thead>
               <tr>
-                <th />
+                <th>Racer</th>
                 <% weeks = @results[gender][discipline][classification].keys %>
                 <% weeks.each do |week| %>
-                    <th colspan="4">Week <%= week %></th>
+                    <th>Week <%= week %></th>
                 <% end %>
-                <th colspan="2">Total Points</th>
-              </tr>
-              <tr>
-                <th>Racer</th>
-                <% weeks.each do %>
-                    <th>Run 1</th>
-                    <th>Run 2</th>
-                    <th>Combined</th>
-                    <th>Points</th>
-                <% end %>
-                <th>Racer</th>
-                <th>Points</th>
+                <th>Total Points</th>
+                <th>
               </tr>
               </thead>
               <tbody>
@@ -38,12 +28,8 @@
                         <td><%= racer.name %></td>
                         <% weeks.each do |week| %>
                             <% time_entry =  @racer_weekly_entries[racer.name][week] %>
-                            <td><%= time_entry.run1 %></td>
-                            <td><%= time_entry.run2 %></td>
-                            <td><%= time_entry.combined %></td>
                             <td><%= time_entry.get_points() %></td>
                         <% end %>
-                        <td><%= racer.name %></td>
                         <td><%= @total_points[racer.name] %></td>
                       </tr>
                   <% end %>
