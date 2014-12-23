@@ -5,6 +5,20 @@ ActiveAdmin.register Racer do
   # http://activeadmin.info/docs/5-forms.html
   # http://www.rubydoc.info/github/justinfrench/formtastic#Usage
 
+  index do
+    selectable_column
+    
+    column :id
+    column :name
+    column :gender
+    column :discipline
+    column :team
+    column :classification
+
+    actions
+  end
+
+
   form do |f|
     f.inputs 'Details' do
       f.input :name
