@@ -1,0 +1,56 @@
+<div class="page-header">
+  <h1>Individual Results</h1>
+</div>
+<% @results.keys.each do |gender| %>
+    <h2><%= Racer.full_gender gender %></h2>
+    <% @results[gender].keys.each do |discipline| %>
+        <h3><%= discipline %></h3>
+        <% @results[gender][discipline].keys.each do |classification| %>
+            <h4>Class <%= classification %></h4>
+            <table class="table table-striped">
+              <thead>
+              <tr>
+                <th />
+                <% weeks = @results[gender][discipline][classification].keys %>
+                <% weeks.each do |week| %>
+                    <th colspan="4">Week <%= week %></th>
+                <% end %>
+                <th colspan="2">Total Points</th>
+              </tr>
+              <tr>
+                <th>Racer</th>
+                <% weeks.each do %>
+                    <th>Run 1</th>
+                    <th>Run 2</th>
+                    <th>Combined</th>
+                    <th>Points</th>
+                <% end %>
+                <th>Racer</th>
+                <th>Points</th>
+              </tr>
+              </thead>
+              <tbody>
+              <% racers = @results[gender][discipline][classification][weeks[0]].map {|time_entry| time_entry.racer} %>
+              <% racers.sort_by! {|racer| @total_points[racer.name]} %>
+              <% racers.each do |racer| %>
+                  <% if true #racer.is_individual %>
+                      <tr>
+                        <td><%= racer.name %></td>
+                        <% weeks.each do |week| %>
+                            <% time_entry =  @racer_weekly_entries[racer.name][week] %>
+                            <td><%= time_entry.run1 %></td>
+                            <td><%= time_entry.run2 %></td>
+                            <td><%= time_entry.combined %></td>
+                            <td><%= time_entry.get_points() %></td>
+                        <% end %>
+                        <td><%= racer.name %></td>
+                        <td><%= @total_points[racer.name] %></td>
+                      </tr>
+                  <% end %>
+              <% end %>
+              </tbody>
+            </table>
+        <% end %>
+    <% end %>
+<% end %>
+

@@ -12,16 +12,24 @@ class ResultsController < ApplicationController
 
   def points
     calculate_points
+    delete_blanks @results
   end
 
   def individual_results
-    #@racers = Racers.where()
+    calculate_points
+    puts 'before filter_individuals: ' + @results.to_s
+    filter_individuals
+    puts 'after filter_individuals: ' + @results.to_s
+    delete_blanks @results
+    puts 'after delete_blanks: ' + @results.to_s
   end
 
   def team_results
     calculate_team_points
     @teams = Team.all
   end
+
+
 
   private
 
@@ -68,6 +76,7 @@ class ResultsController < ApplicationController
   end
 
 
+
   def calculate_team_points
 
     calculate_points
@@ -85,7 +94,6 @@ class ResultsController < ApplicationController
 
     # team_totals[team.name] = int
     @team_totals = {}
-
 
     Team.all.each do |team|
       @team_week_racer_entries[team.name] = {}
@@ -105,31 +113,64 @@ class ResultsController < ApplicationController
           end
         end
 
-          @team_week_racer_entries[team.name][week.name] = {}
-          @team_weekly_totals[team.name][week.name] = 0
-          entries.each do |entry|
-            @team_week_racer_entries[team.name][week.name][entry.racer.name] = entry
-            if not entry.is_excluded_from_team?
-              @team_weekly_totals[team.name][week.name] += entry.get_points
-              @team_totals[team.name] += entry.get_points
-            end
+        @team_week_racer_entries[team.name][week.name] = {}
+        @team_weekly_totals[team.name][week.name] = 0
+        entries.each do |entry|
+          @team_week_racer_entries[team.name][week.name][entry.racer.name] = entry
+          if not entry.is_excluded_from_team?
+            @team_weekly_totals[team.name][week.name] += entry.get_points
+            @team_totals[team.name] += entry.get_points
           end
-        end
-      end
-
-
-      # Get a list of team names ordered by total points
-      @team_names = @team_totals.keys.sort_by {|team_name| @team_totals[team_name]}.reject {|name| name == 'Individual'}
-
-      # team_racer_names[team_name][0..worst_racer] = racer.name
-      @team_racer_names = {}
-      Team.all.each do |team|
-        @team_racer_names[team.name] = []
-        racers = team.racers.sort_by { |racer| @total_points[racer]}
-        racers.each do |racer|
-          @team_racer_names[team.name] << racer.name
         end
       end
     end
 
+    # Get a list of team names ordered by total points
+    @team_names = @team_totals.keys.sort_by {|team_name| @team_totals[team_name]}.reject {|name| name == 'Individual'}
+
+    # team_racer_names[team_name][0..worst_racer] = racer.name
+    @team_racer_names = {}
+    Team.all.each do |team|
+      @team_racer_names[team.name] = []
+      racers = team.racers.sort_by { |racer| @total_points[racer]}
+      racers.each do |racer|
+        @team_racer_names[team.name] << racer.name
+      end
+    end
   end
+
+
+
+  def filter_individuals
+    @results.keys.each do |gender|
+      @results[gender].keys.each do |discipline|
+        @results[gender][discipline].keys.each do |classification|
+          @results[gender][discipline][classification].keys.each do |week|
+            i = 0
+            #@results[gender][discipline][classification][week].each_with_index do |time_entry, i|
+            while i < @results[gender][discipline][classification][week].size
+              time_entry = @results[gender][discipline][classification][week][i]
+              if not time_entry.racer.is_individual
+                puts 'size before delete: ' + @results[gender][discipline][classification][week].size.to_s
+                @results[gender][discipline][classification][week].delete_at(i)
+                puts 'deleting entry: ' + gender + ', ' + discipline + ', ' + classification + ', ' + week.to_s + ', ' +  time_entry.racer.name + ', ' + time_entry.racer.team.name
+                puts 'size after delete: ' + @results[gender][discipline][classification][week].size.to_s
+              else
+                i += 1
+              end
+            end
+          end
+        end
+      end
+    end
+  end
+
+
+  def delete_blanks(hash)
+    hash.delete_if do |k, v|
+      (v.respond_to?(:empty?) ? v.empty? : !v) or v.instance_of?(Hash) && (delete_blanks v).empty?
+    end
+  end
+
+
+end
