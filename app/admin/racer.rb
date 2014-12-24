@@ -7,7 +7,7 @@ ActiveAdmin.register Racer do
 
   index do
     selectable_column
-    
+
     column :id
     column :name
     column :gender

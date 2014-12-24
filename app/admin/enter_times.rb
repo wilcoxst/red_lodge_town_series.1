@@ -12,6 +12,7 @@ ActiveAdmin.register_page "Enter Times" do
   content do
     week = Week.last
     para "Enter times for current week"
+    link_to "Download CSV", admin_enter_times_get_csv_path
     #f.inputs 'Week' do
     #f.input :week, :as => :select, :collection => Week.all, :include_blank => false
     h1 "Week #{week.name}"
@@ -40,6 +41,9 @@ ActiveAdmin.register_page "Enter Times" do
     end
     para "Hello"
     link_to "Do Stuff", admin_enter_times_ex_path, :method => :post
+  end
+
+  page_action :get_csv do
   end
 
 end

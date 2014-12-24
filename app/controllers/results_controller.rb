@@ -45,6 +45,9 @@ class ResultsController < ApplicationController
     # total_points[racer_name] = int
     @total_points = {}
 
+    # total_time[racer_name] = decimal
+    @total_time = {}
+
     genders.each do |gender|
       @results[gender] = {}
       Discipline.all.each do |discipline|
@@ -67,6 +70,11 @@ class ResultsController < ApplicationController
                 @total_points[name] = 0
               end
               @total_points[name] += time_entry.get_points
+              # Total time
+              if @total_time[name] == nil
+                @total_time[name] = 0
+              end
+              @total_time[name] += time_entry.combined
             end
           end
         end

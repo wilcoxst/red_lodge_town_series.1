@@ -15,7 +15,7 @@
                 <% weeks.each do |week| %>
                     <th colspan="4">Week <%= week %></th>
                 <% end %>
-                <th colspan="2">Total Points</th>
+                <th colspan="3">Totals</th>
               </tr>
               <tr>
                 <th>Racer</th>
@@ -26,7 +26,8 @@
                     <th>Points</th>
                 <% end %>
                 <th>Racer</th>
-                <th>Points</th>
+                <th>Total Points</th>
+                <th>Total Time</th>
               </tr>
               </thead>
               <tbody>
@@ -44,6 +45,7 @@
                     <% end %>
                     <td><%= name %></td>
                     <td><%= @total_points[name] %></td>
+                    <td><%= @total_time[name] %></td>
                   </tr>
               <% end %>
               </tbody>
