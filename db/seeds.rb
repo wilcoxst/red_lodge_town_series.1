@@ -16,7 +16,7 @@ tele   = Discipline.create({name: 'Telemark'})
 # racer = Racer.create({name: 'Stephen', gender: 'M', team: team, discipline: board, classification: classC})
 
 # 2015 Data
-Week.create({name: 1, date: 2015-01-10})
+Week.create({name: 1, date: '2015-01-10'})
 team = Team.create({name: 'Aukema Construction'})
 racer = Racer.create({name: "Kristen Hollum", gender: 'F', team: team, discipline: board, classification: classA})
 TimeEntry.create({week_id: 1, racer: racer, run1: 26.3, run2: 26.7})
