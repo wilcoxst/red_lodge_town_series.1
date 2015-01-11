@@ -15,5 +15,9 @@ ActiveAdmin.register TimeEntry do
   #   permitted
   # end
 
+  collection_action :import_csv, :method => :post do
+    # Do some CSV importing work here...
+    redirect_to :action => :index, :notice => "CSV imported successfully!"
+  end
 
 end

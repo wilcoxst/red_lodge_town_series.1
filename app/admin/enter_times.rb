@@ -5,6 +5,14 @@ ActiveAdmin.register_page "Enter Times" do
     redirect_to admin_enter_times_path, :notice => "Time entries saved"
   end
 
+  page_action :csv, :method => :get do
+
+  end
+
+  action_item do
+    link_to "Download CSV", admin_enter_times_csv_path, :method => :post
+  end
+
   action_item do
     link_to "Save Entries", admin_enter_times_ex_path, :method => :post
   end
@@ -45,5 +53,6 @@ ActiveAdmin.register_page "Enter Times" do
 
   page_action :get_csv do
   end
+
 
 end

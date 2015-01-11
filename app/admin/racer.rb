@@ -31,4 +31,14 @@ ActiveAdmin.register Racer do
     f.actions
   end
 
+
+  csv :force_quotes => true do
+    column :id
+    column :name
+    column('Discipline') { |racer| racer.discipline.name }
+    column('Team') { |racer| racer.team.name }
+    column('Run1') { |racer| ''}
+    column('Run2') { |racer| ''}
+  end
+
 end
