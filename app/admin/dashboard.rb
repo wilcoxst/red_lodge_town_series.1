@@ -32,7 +32,7 @@ ActiveAdmin.register_page "Dashboard" do
       column do
         panel "Individuals" do
           ul do
-            Racer.where('team_id IS ?', Team.get_individual_id).map do |racer|
+            Racer.where('team_id = ?', Team.get_individual_id).map do |racer|
               li link_to(racer.name, admin_racer_path(racer))
             end
           end
