@@ -10,6 +10,11 @@ class ResultsController < ApplicationController
     @time_entries = TimeEntry.all
   end
 
+  def rankings
+    calculate_points
+    delete_blanks @results
+  end
+
   def points
     calculate_points
     delete_blanks @results
@@ -110,8 +115,12 @@ class ResultsController < ApplicationController
       Week.all.each do |week|
         entries = []
         team.racers.each do |racer|
+          puts @racer_weekly_entries[racer.name][week.name]
           entries << @racer_weekly_entries[racer.name][week.name]
         end
+
+        puts "entries"
+        puts entries.to_s
 
         # Only the top 4 entries count toward the team's total for the week
         entries.sort_by! {|entry| entry.get_points}
