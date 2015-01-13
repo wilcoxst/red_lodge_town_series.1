@@ -1,0 +1,24 @@
+<%= form_for :dump, :url => {:action => 'upload_csv'}, :html => {:multipart => true} do |f| %>
+
+    <table>
+      <tr>
+        <td>
+          <label for='dump_file'>
+            Select a CSV file
+          </label>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <%= f.file_field :file %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <%= submit_tag 'submit' %>
+        </td>
+      </tr>
+    </table>
+
+<% end %>
+

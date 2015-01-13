@@ -1,3 +1,5 @@
+require 'csv'
+
 class TimeEntry < ActiveRecord::Base
   belongs_to :week
   belongs_to :racer
@@ -41,5 +43,27 @@ class TimeEntry < ActiveRecord::Base
   def is_excluded_from_team?
     not @excluded_from_team.nil?
   end
+
+
+  def self.import_csv(file)
+
+    # Entries will be applied to latest week
+    week_id = Week.get_max_week_id
+    puts 'last week id is ' + week_id.to_s
+
+    # We only care about which racer, and the 2 run times
+    data = file.read
+    CSV.parse(data, headers:true) do |row|
+      time_entry = TimeEntry.new
+      time_entry.week_id = week_id
+      puts 'row[:id] is ' + row['Id']
+      puts 'row[:id].to_i is ' + row['Id'].to_i.to_s
+      time_entry.racer_id = row['Id'].to_i
+      time_entry.run1 = row['Run1'].to_f
+      time_entry.run2 = row['Run2'].to_f
+      time_entry.save
+    end
+  end
+
 
 end

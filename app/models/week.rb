@@ -5,4 +5,8 @@ class Week < ActiveRecord::Base
     Week.all.sort_by { |week| week.name}.map { |week| week.name}
   end
 
+  def self.get_max_week_id
+    get_week_names[-1]
+  end
+
 end

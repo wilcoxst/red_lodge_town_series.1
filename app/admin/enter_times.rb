@@ -1,57 +1,35 @@
 ActiveAdmin.register_page "Enter Times" do
 
-  page_action :ex, :method => :post do
-    # do stuff here
-    redirect_to admin_enter_times_path, :notice => "Time entries saved"
+  page_action :upload_csv, :method => :post do
+    begin
+      TimeEntry.import_csv(params[:dump][:file])
+      redirect_to admin_enter_times_path, :notice => 'CSV Imported Successfully'
+    rescue ActiveRecord::RecordNotUnique
+      redirect_to admin_enter_times_path, :alert => 'Duplicate Time Entries.  Have you already entered times for this week?  Create a new week to import more times, or go to Time Entries, filter on this week, select all and use the delete batch action.'
+    end
   end
 
-  page_action :csv, :method => :get do
-
-  end
-
-  action_item do
-    link_to "Download CSV", admin_enter_times_csv_path, :method => :post
-  end
-
-  action_item do
-    link_to "Save Entries", admin_enter_times_ex_path, :method => :post
-  end
+  # action_item do
+  #   link_to "Download CSV", admin_racers_path( :format => :csv )
+  # end
 
   content do
-    week = Week.last
-    para "Enter times for current week"
-    link_to "Download CSV", admin_enter_times_get_csv_path
-    #f.inputs 'Week' do
-    #f.input :week, :as => :select, :collection => Week.all, :include_blank => false
-    h1 "Week #{week.name}"
-    #end
-    Team.all.each do |team|
-      #form do |f|
-      h2 team.name
-      team.racers.each do |racer|
-        active_admin_form_for :time_entry do |f|
-          f.inputs racer.name do
-            columns do
-              #para racer.name
-              column do
-                f.input :run1
-              end
-              column do
-                f.input :run2
-              end
-              # column do
-              #   f.submit
-              # end
-            end
-          end
-        end
-      end
-    end
-    para "Hello"
-    link_to "Do Stuff", admin_enter_times_ex_path, :method => :post
-  end
 
-  page_action :get_csv do
+    ol do
+      li h2 link_to "Download Time Entry CSV", admin_racers_path( :format => :csv )
+      li h2 'Enter times'
+      li h2 link_to "Create New Week", admin_weeks_path
+      li h2 'Upload Time Entry CSV'
+    end
+
+    render 'admin/upload_csv'
+
+#    form do |f|
+#      f.select :week_id, :collection => Week.all, :include_blank => false
+#      f.input :name
+#      #f.actions
+#    end
+
   end
 
 

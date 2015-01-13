@@ -15,5 +15,6 @@ ActiveAdmin.register Week do
   #   permitted
   # end
 
+  permit_params :id, :name, :date
 
 end

@@ -7,7 +7,9 @@ ActiveAdmin.register_page "Dashboard" do
     div class: "blank_slate_container", id: "dashboard_default_message" do
       span class: "blank_slate" do
         span 'Red Lodge Town Series Admin Dashboard'
-        small 'Click on the menu items above to organize teams, and enter times'
+        small 'Click on the menu items above to organize teams, and edit time entries'
+        #span link_to 'Download Time Entry Spreadsheet', admin_racers_path( :format => :csv )
+        span link_to 'Enter Times', admin_enter_times_path
       end
     end
 
