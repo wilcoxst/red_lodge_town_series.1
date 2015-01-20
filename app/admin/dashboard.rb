@@ -40,6 +40,17 @@ ActiveAdmin.register_page "Dashboard" do
           end
         end
       end
+
+      # column do
+      #   panel "Weeks" do
+      #     ul do
+      #       Week.all_weeks_with_times.each do |week|
+      #         li link_to(week.name, admin_week_path(week))
+      #       end
+      #     end
+      #   end
+      # end
+
     end
 
     # Here is an example of a simple dashboard with columns and panels.

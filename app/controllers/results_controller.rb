@@ -6,7 +6,7 @@ class ResultsController < ApplicationController
   def index
     @racers = Racer.all
     @teams = Team.all
-    @weeks = Week.all
+    @weeks = Week.all_weeks_with_times
     @time_entries = TimeEntry.all
   end
 
@@ -59,7 +59,7 @@ class ResultsController < ApplicationController
         @results[gender][discipline.name] = {}
         Classification.all.each do |classification|
           @results[gender][discipline.name][classification.name] = {}
-          Week.all.each do |week|
+          Week.all_weeks_with_times.each do |week|
             set = TimeEntry.getSet gender, discipline, classification, week
             @results[gender][discipline.name][classification.name][week.name] = set
             set.each do |time_entry|
@@ -112,7 +112,7 @@ class ResultsController < ApplicationController
       @team_week_racer_entries[team.name] = {}
       @team_weekly_totals[team.name] = {}
       @team_totals[team.name] = 0
-      Week.all.each do |week|
+      Week.all_weeks_with_times.each do |week|
         entries = []
         team.racers.each do |racer|
           puts @racer_weekly_entries[racer.name][week.name]

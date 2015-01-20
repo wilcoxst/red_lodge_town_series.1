@@ -64,6 +64,8 @@ class TimeEntry < ActiveRecord::Base
         time_entry.run1 = row['Run1'].to_f
         time_entry.run2 = row['Run2'].to_f
         time_entry.save
+      else
+        puts 'empty row in csv'
       end
     end
   end
