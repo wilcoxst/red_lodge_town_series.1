@@ -8,6 +8,5 @@ class CreateTimeEntries < ActiveRecord::Migration
       t.timestamps
     end
     add_index :time_entries, [:week_id, :racer_id], :unique => true
-    add_index :time_entries, [:week_id]
   end
 end
