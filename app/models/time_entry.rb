@@ -23,6 +23,7 @@ class TimeEntry < ActiveRecord::Base
     set
   end
 
+
   def combined
     run1 + run2
   end
@@ -54,14 +55,16 @@ class TimeEntry < ActiveRecord::Base
     # We only care about which racer, and the 2 run times
     data = file.read
     CSV.parse(data, headers:true) do |row|
-      time_entry = TimeEntry.new
-      time_entry.week_id = week_id
-      puts 'row[:id] is ' + row['Id']
-      puts 'row[:id].to_i is ' + row['Id'].to_i.to_s
-      time_entry.racer_id = row['Id'].to_i
-      time_entry.run1 = row['Run1'].to_f
-      time_entry.run2 = row['Run2'].to_f
-      time_entry.save
+      if row['Id'] != nil and row['Run1'] != nil and row['Run2'] != nil
+        time_entry = TimeEntry.new
+        time_entry.week_id = week_id
+        puts 'row[:id] is ' + row['Id']
+        puts 'row[:id].to_i is ' + row['Id'].to_i.to_s
+        time_entry.racer_id = row['Id'].to_i
+        time_entry.run1 = row['Run1'].to_f
+        time_entry.run2 = row['Run2'].to_f
+        time_entry.save
+      end
     end
   end
 
