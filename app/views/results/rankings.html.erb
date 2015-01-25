@@ -27,12 +27,12 @@
               </tr>
               </thead>
               <tbody>
+              <% week = weeks.last %>
               <% racer_names = @results[gender][discipline][classification][weeks[0]].map {|time_entry| time_entry.racer.name} %>
-              <% racer_names.sort_by! {|name| @total_points[name]} %>
+              <% racer_names.sort_by! {|name| @racer_weekly_entries[name][week].get_points} %>
               <% racer_names.each do |name| %>
                   <tr>
                     <td><%= name %></td>
-                    <% week = weeks.last %>
                     <% time_entry =  @racer_weekly_entries[name][week] %>
                     <td><%= time_entry.run1 %></td>
                     <td><%= time_entry.run2 %></td>
