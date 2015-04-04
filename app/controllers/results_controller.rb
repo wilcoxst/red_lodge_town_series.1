@@ -15,6 +15,11 @@ class ResultsController < ApplicationController
     delete_blanks @results
   end
 
+  def times
+    calculate_points
+    delete_blanks @results
+  end
+
   def points
     calculate_points
     delete_blanks @results
@@ -22,16 +27,18 @@ class ResultsController < ApplicationController
 
   def individual_results
     calculate_points
-    puts 'before filter_individuals: ' + @results.to_s
-    filter_individuals
-    puts 'after filter_individuals: ' + @results.to_s
+    only_individuals
     delete_blanks @results
-    puts 'after delete_blanks: ' + @results.to_s
   end
 
   def team_results
     calculate_team_points
     @teams = Team.all
+  end
+
+  def individual_times
+    @last_week = Week.get_last_week
+    @last_week_time_entries = TimeEntry.last_week_entries
   end
 
 
@@ -119,9 +126,6 @@ class ResultsController < ApplicationController
           entries << @racer_weekly_entries[racer.name][week.name]
         end
 
-        puts "entries"
-        puts entries.to_s
-
         # Only the top 4 entries count toward the team's total for the week
         entries.sort_by! {|entry| entry.get_points}
         entries.each_with_index do |entry, i|
@@ -158,20 +162,16 @@ class ResultsController < ApplicationController
 
 
 
-  def filter_individuals
+  def only_individuals
     @results.keys.each do |gender|
       @results[gender].keys.each do |discipline|
         @results[gender][discipline].keys.each do |classification|
           @results[gender][discipline][classification].keys.each do |week|
             i = 0
-            #@results[gender][discipline][classification][week].each_with_index do |time_entry, i|
             while i < @results[gender][discipline][classification][week].size
               time_entry = @results[gender][discipline][classification][week][i]
               if not time_entry.racer.is_individual
-                puts 'size before delete: ' + @results[gender][discipline][classification][week].size.to_s
                 @results[gender][discipline][classification][week].delete_at(i)
-                puts 'deleting entry: ' + gender + ', ' + discipline + ', ' + classification + ', ' + week.to_s + ', ' +  time_entry.racer.name + ', ' + time_entry.racer.team.name
-                puts 'size after delete: ' + @results[gender][discipline][classification][week].size.to_s
               else
                 i += 1
               end
@@ -183,6 +183,7 @@ class ResultsController < ApplicationController
   end
 
 
+  # Recursively delete any hash keys with empty values
   def delete_blanks(hash)
     hash.delete_if do |k, v|
       (v.respond_to?(:empty?) ? v.empty? : !v) or v.instance_of?(Hash) && (delete_blanks v).empty?

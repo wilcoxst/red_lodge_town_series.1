@@ -12,8 +12,10 @@ Rails.application.routes.draw do
 
   get 'results' => 'results#rankings'
   get 'rankings' => 'results#rankings'
+  get 'times' => 'results#times'
   get 'points' => 'results#points'
   get 'individual_results' => 'results#individual_results'
+  get 'individual_times' => 'results#individual_times'
   get 'team_results' => 'results#team_results'
 
   root 'results#rankings'

@@ -23,6 +23,12 @@ class TimeEntry < ActiveRecord::Base
     set
   end
 
+  def self.last_week_entries
+    last_week = Week.get_last_week
+    puts 'last_week.id: ' + last_week.id.to_s
+    TimeEntry.joins(:racer).where(week_id: last_week.id).sort_by { |time_entry| time_entry.combined}
+  end
+
 
   def combined
     run1 + run2
