@@ -16,7 +16,7 @@ class Week < ActiveRecord::Base
   end
 
   def self.get_max_week_id
-    max_week = get_last_week
+    max_week = Week.all.sort_by { |week| week.name}[-1]
     max_week.id.to_s
   end
 
