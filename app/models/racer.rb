@@ -36,4 +36,8 @@ class Racer < ActiveRecord::Base
   def get_points
     @points
   end
+
+  def to_s
+    name
+  end
 end

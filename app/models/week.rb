@@ -20,4 +20,8 @@ class Week < ActiveRecord::Base
     max_week.id.to_s
   end
 
+  def to_s
+    "week #{id}"
+  end
+
 end

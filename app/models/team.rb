@@ -18,4 +18,8 @@ class Team < ActiveRecord::Base
      end
     @@individual_id
   end
+
+  def to_s
+    name
+  end
 end

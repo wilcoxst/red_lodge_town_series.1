@@ -51,6 +51,10 @@ class TimeEntry < ActiveRecord::Base
     not @excluded_from_team.nil?
   end
 
+  def to_s
+    "run1: #{run1}, run2: #{run2}"
+  end
+
 
   def self.import_csv(file)
 

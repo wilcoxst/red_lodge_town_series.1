@@ -122,7 +122,7 @@ class ResultsController < ApplicationController
       Week.all_weeks_with_times.each do |week|
         entries = []
         team.racers.each do |racer|
-          puts @racer_weekly_entries[racer.name][week.name]
+          puts "#{team}|#{racer} - #{week}: #{@racer_weekly_entries[racer.name][week.name]}"
           entries << @racer_weekly_entries[racer.name][week.name]
         end
 
