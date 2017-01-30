@@ -4,10 +4,10 @@
 <table class="table table-striped">
   <thead>
   <tr>
-    <th />
     <th colspan="4">Week <%= @last_week.name %></th>
   </tr>
   <tr>
+    <th>Rank</th>
     <th>Racer</th>
     <th>Run 1</th>
     <th>Run 2</th>
@@ -15,8 +15,10 @@
   </tr>
   </thead>
   <tbody>
+  <% rank = 0 %>
   <% @last_week_time_entries.each do |time_entry| %>
       <tr>
+        <td><%= rank+=1 %></td>
         <td><%= time_entry.racer.name %></td>
         <td><%= time_entry.run1 %></td>
         <td><%= time_entry.run2 %></td>
