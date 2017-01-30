@@ -18,7 +18,7 @@ ActiveAdmin.register_page "Enter Times" do
     ol do
       li h2 link_to "Download Time Entry CSV", admin_racers_path( :format => :csv )
       li h2 'Enter times'
-      li h2 link_to "Create New Week", admin_weeks_path
+      li h2 link_to "Create New Week (Name should be just the number, e.g. 1)", admin_weeks_path
       li h2 'Upload Time Entry CSV'
     end
 
