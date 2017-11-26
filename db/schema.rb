@@ -79,8 +79,8 @@ ActiveRecord::Schema.define(version: 20141207004005) do
   end
 
   create_table "time_entries", force: true do |t|
-    t.decimal  "run1"
-    t.decimal  "run2"
+    t.decimal  "run1",       precision: 5, scale: 2
+    t.decimal  "run2",       precision: 5, scale: 2
     t.integer  "week_id"
     t.integer  "racer_id"
     t.datetime "created_at"
