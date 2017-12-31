@@ -21,6 +21,7 @@
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
+.DS_Store
 
 # Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
 
