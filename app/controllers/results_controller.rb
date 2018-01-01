@@ -43,6 +43,13 @@ class ResultsController < ApplicationController
     @teams = Team.all
   end
 
+  def team_times
+    calculate_team_times
+    @last_week = Week.get_last_week
+    @last_week_id = Week.get_max_week_id
+    @teams = Team.all
+  end
+
   def individual_results
     @last_week = Week.get_last_week
     @last_week_time_entries = TimeEntry.last_week_entries
@@ -130,7 +137,7 @@ class ResultsController < ApplicationController
           entries << @racer_weekly_entries[racer.name][week.name]
         end
 
-        # Only the top 4 entries count toward the team's total for the week
+        # Only the top 4 entries (indexes 0..3) count toward the team's total for the week
         entries.sort_by! {|entry| entry.get_points}
         entries.each_with_index do |entry, i|
           if i > 3
@@ -166,6 +173,62 @@ class ResultsController < ApplicationController
         @team_racer_names[team.name] << racer.name
       end
     end
+  end
+
+
+  def calculate_team_times
+
+    calculate_points
+
+    @week_names = Week.get_week_names
+
+    # team_week_racer_entries[team][week][racer] = time_entry
+    @team_week_racer_entries = {}
+
+    # team_weekly_totals[team.name] = int
+    @team_weekly_totals = {}
+
+    # team_totals[team.name] = int
+    @team_totals = {}
+
+    Team.all.each do |team|
+      @team_week_racer_entries[team.name] = {}
+      @team_weekly_totals[team.name] = {}
+      @team_totals[team.name] = 0
+      Week.all_weeks_with_times.each do |week|
+        entries = []
+        team.racers.each do |racer|
+          puts "#{team}|#{racer} - #{week}: #{@racer_weekly_entries[racer.name][week.name]}"
+          entries << @racer_weekly_entries[racer.name][week.name]
+        end
+
+        # Only the top 4 entries (indexes 0..3) count toward the team's total for the week
+        entries.sort_by! {|entry| entry.combined}
+        entries.each_with_index do |entry, i|
+          if i > 3
+            entry.exclude_from_team
+          end
+        end
+
+        @team_week_racer_entries[team.name][week.name] = {}
+        @team_weekly_totals[team.name][week.name] = 0
+        entries.each do |entry|
+          @team_week_racer_entries[team.name][week.name][entry.racer.name] = entry
+          if not entry.is_excluded_from_team?
+            @team_weekly_totals[team.name][week.name] += entry.combined
+            @team_totals[team.name] += entry.combined
+          end
+        end
+      end
+    end
+
+    # Get a list of team names ordered by total times
+    @team_names = @team_totals.keys.sort_by {|team_name| @team_totals[team_name]}.reject {|name| name == 'Individual'}
+
+    # Get a list of team names ordered by last week's times
+    last_week_name = Week.get_last_week.name
+    @team_names_last_week = @team_weekly_totals.keys.sort_by {|team_name| @team_weekly_totals[team_name][last_week_name]}.reject {|name| name == 'Individual'}
+
   end
 
 
