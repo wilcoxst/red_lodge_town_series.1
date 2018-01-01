@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   get 'individual_results' => 'results#individual_results'
   get 'individual_times' => 'results#individual_times'
   get 'team_results' => 'results#team_results'
+  get 'team_points' => 'results#team_points'
 
   root 'results#rankings'
   # The priority is based upon order of creation: first created -> highest priority.

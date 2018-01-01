@@ -21,7 +21,7 @@ class Week < ActiveRecord::Base
   end
 
   def to_s
-    "week #{id}"
+    "Week #{id}"
   end
 
 end

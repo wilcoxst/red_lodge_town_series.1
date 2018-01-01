@@ -36,6 +36,13 @@ class ResultsController < ApplicationController
     @teams = Team.all
   end
 
+  def team_points
+    calculate_team_points
+    @last_week = Week.get_last_week
+    @last_week_id = Week.get_max_week_id
+    @teams = Team.all
+  end
+
   def individual_results
     @last_week = Week.get_last_week
     @last_week_time_entries = TimeEntry.last_week_entries
@@ -106,9 +113,6 @@ class ResultsController < ApplicationController
     # team_week_racer_entries[team][week][racer] = time_entry
     @team_week_racer_entries = {}
 
-    # team_week_racer_entries[team][week][racer] = time_entry
-    @team_racer_week_entries = {}
-
     # team_weekly_totals[team.name] = int
     @team_weekly_totals = {}
 
@@ -148,6 +152,10 @@ class ResultsController < ApplicationController
 
     # Get a list of team names ordered by total points
     @team_names = @team_totals.keys.sort_by {|team_name| @team_totals[team_name]}.reject {|name| name == 'Individual'}
+
+    # Get a list of team names ordered by last week's points
+    last_week_name = Week.get_last_week.name
+    @team_names_last_week = @team_weekly_totals.keys.sort_by {|team_name| @team_weekly_totals[team_name][last_week_name]}.reject {|name| name == 'Individual'}
 
     # team_racer_names[team_name][0..worst_racer] = racer.name
     @team_racer_names = {}

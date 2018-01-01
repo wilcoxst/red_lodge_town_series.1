@@ -1,0 +1,49 @@
+<h1>Team Points</h1>
+
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th>Rank</th>
+    <th>Team</th>
+    <th><%= @last_week %></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% rank = 0 %>
+  <% @team_names_last_week.each do |team_name| %>
+      <tr>
+        <td><%= rank+=1 %></td>
+        <td><b><%= team_name %></b></td>
+        <td><b>
+          <%= @team_weekly_totals[team_name][@last_week.name] %>
+        </b></td>
+      </tr>
+
+  <% end %>
+  </tbody>
+</table>
+
+
+<h1>Season Standings</h1>
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th>Rank</th>
+    <th>Team</th>
+    <th>Overall Points</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% rank = 0 %>
+  <% @team_names.each do |team_name| %>
+      <tr>
+        <td><%= rank+=1 %></td>
+        <td><%= team_name %></td>
+        <td><%= @team_totals[team_name] %></td>
+      </tr>
+  <% end %>
+  </tbody>
+ </table>
+
