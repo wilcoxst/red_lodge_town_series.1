@@ -46,7 +46,6 @@ class ResultsController < ApplicationController
   def team_times
     calculate_team_times
     @last_week = Week.get_last_week
-    @last_week_id = Week.get_max_week_id
     @teams = Team.all
   end
 
@@ -55,6 +54,11 @@ class ResultsController < ApplicationController
     @last_week_time_entries = TimeEntry.last_week_entries
   end
 
+  def per_classification
+    calculate_points
+    @last_week = Week.get_last_week
+    delete_blanks @results
+  end
 
 
   private

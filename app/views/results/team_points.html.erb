@@ -14,10 +14,10 @@
   <% @team_names_last_week.each do |team_name| %>
       <tr>
         <td><%= rank+=1 %></td>
-        <td><b><%= team_name %></b></td>
-        <td><b>
+        <td><%= team_name %></td>
+        <td>
           <%= @team_weekly_totals[team_name][@last_week.name] %>
-        </b></td>
+        </td>
       </tr>
 
   <% end %>

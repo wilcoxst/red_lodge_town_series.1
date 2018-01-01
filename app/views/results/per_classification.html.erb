@@ -1,0 +1,49 @@
+<% week = @last_week.name %>
+<div class="page-header">
+  <h1>Individual Results Per Classification</h1>
+</div>
+
+<table class="table table-striped table-condensed">
+  <thead>
+  <tr>
+    <th colspan="4"/>
+    <th colspan="4">Week <%= week %></th>
+  </tr>
+  <tr>
+    <th>Class</th>
+    <th>Categ</th>
+    <th>Team</th>
+    <th>Racer</th>
+    <th>Run 1</th>
+    <th>Run 2</th>
+    <th>Comb.</th>
+    <th>Points</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @results.keys.each do |gender| %>
+      <% @results[gender].keys.each do |discipline| %>
+          <% @results[gender][discipline].keys.each do |classification| %>
+              <% racer_names = @results[gender][discipline][classification][week].map {|time_entry| time_entry.racer.name} %>
+              <% racer_names.sort_by! {|name| @racer_weekly_entries[name][week].get_points} %>
+              <% racer_names.each do |name| %>
+                  <tr>
+                    <% time_entry =  @racer_weekly_entries[name][week] %>
+                    <td><%= time_entry.racer.classification %></td>
+                    <td><%= time_entry.racer.gender + time_entry.racer.discipline.abbreviation %></td>
+                    <td><%= time_entry.racer.team %></td>
+                    <td><%= name %></td>
+                    <td><%= time_entry.run1 %></td>
+                    <td><%= time_entry.run2 %></td>
+                    <td><%= time_entry.combined %></td>
+                    <td><%= time_entry.get_points() %></td>
+                  </tr>
+              <% end %>
+              <tr><td colspan="8"> &nbsp </td></tr>
+          <% end %>
+      <% end %>
+  <% end %>
+  </tbody>
+</table>
+
