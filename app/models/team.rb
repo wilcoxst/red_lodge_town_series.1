@@ -2,6 +2,10 @@ class Team < ActiveRecord::Base
   has_many :racers
 
 
+  def to_s
+    name
+  end
+
   private
 
 
@@ -17,9 +21,5 @@ class Team < ActiveRecord::Base
        puts 'Individual team id is ' + @@individual_id.to_s
      end
     @@individual_id
-  end
-
-  def to_s
-    name
   end
 end

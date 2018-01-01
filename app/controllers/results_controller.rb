@@ -25,7 +25,7 @@ class ResultsController < ApplicationController
     delete_blanks @results
   end
 
-  def individual_results
+  def individual_times
     calculate_points
     only_individuals
     delete_blanks @results
@@ -36,7 +36,7 @@ class ResultsController < ApplicationController
     @teams = Team.all
   end
 
-  def individual_times
+  def individual_results
     @last_week = Week.get_last_week
     @last_week_time_entries = TimeEntry.last_week_entries
   end

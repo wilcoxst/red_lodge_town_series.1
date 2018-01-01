@@ -17,6 +17,11 @@ class Racer < ActiveRecord::Base
 
   end
 
+  def get_class_code
+    gender + discipline.name
+  end
+
+
   def is_individual
     puts name + " is individual? " + (team_id == Team.get_individual_id).to_s
     team_id == Team.get_individual_id

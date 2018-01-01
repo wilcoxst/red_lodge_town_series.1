@@ -1,58 +1,34 @@
-<!-- TODO: Use same template for Points and Individual Results.  Pass in Title -->
 <div class="page-header">
-  <h1>Individual Results</h1>
+  <h1>Overall Individual Results</h1>
 </div>
-
-<% @results.keys.each do |gender| %>
-    <h2><%= Racer.full_gender gender %></h2>
-    <% @results[gender].keys.each do |discipline| %>
-        <h3><%= discipline %></h3>
-        <% @results[gender][discipline].keys.each do |classification| %>
-            <h4>Class <%= classification %></h4>
-            <table class="table table-striped">
-              <thead>
-              <tr>
-                <th />
-                <% weeks = @results[gender][discipline][classification].keys %>
-                <% weeks.each do |week| %>
-                    <th colspan="4">Week <%= week %></th>
-                <% end %>
-                <th colspan="3">Totals</th>
-              </tr>
-              <tr>
-                <th>Racer</th>
-                <% weeks.each do %>
-                    <th>Run 1</th>
-                    <th>Run 2</th>
-                    <th>Combined</th>
-                    <th>Points</th>
-                <% end %>
-                <th>Racer</th>
-                <th>Total Time</th>
-                <th>Total Points</th>
-              </tr>
-              </thead>
-              <tbody>
-              <% racer_names = @results[gender][discipline][classification][weeks[0]].map {|time_entry| time_entry.racer.name} %>
-              <% racer_names.sort_by! {|name| @total_time[name]} %>
-              <% racer_names.each do |name| %>
-                  <tr>
-                    <td><%= name %></td>
-                    <% weeks.each do |week| %>
-                        <% time_entry =  @racer_weekly_entries[name][week] %>
-                        <td><%= time_entry.run1 %></td>
-                        <td><%= time_entry.run2 %></td>
-                        <td><%= time_entry.combined %></td>
-                        <td><%= time_entry.get_points() %></td>
-                    <% end %>
-                    <td><%= name %></td>
-                    <td><%= @total_time[name] %></td>
-                    <td><%= @total_points[name] %></td>
-                  </tr>
-              <% end %>
-              </tbody>
-            </table>
-        <% end %>
-    <% end %>
-<% end %>
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th colspan="4">Week <%= @last_week.name %></th>
+  </tr>
+  <tr>
+    <th>Class</th>
+    <th>Team</th>
+    <th>Racer</th>
+    <th>Run 1</th>
+    <th>Run 2</th>
+    <th>Combined</th>
+    <th>Rank</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% rank = 0 %>
+  <% @last_week_time_entries.each do |time_entry| %>
+      <tr>
+        <td><%= time_entry.racer.gender + time_entry.racer.discipline.abbreviation %></td>
+        <td><%= time_entry.racer.team %></td>
+        <td><%= time_entry.racer.name %></td>
+        <td><%= time_entry.run1 %></td>
+        <td><%= time_entry.run2 %></td>
+        <td><%= time_entry.combined %></td>
+        <td><%= rank+=1 %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
 
