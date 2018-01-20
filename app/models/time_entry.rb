@@ -63,8 +63,13 @@ class TimeEntry < ActiveRecord::Base
     puts 'last week id is ' + week_id.to_s
 
     # We only care about which racer, and the 2 run times
-    data = file.read
-    CSV.parse(data, headers:true) do |row|
+    #data = file.read()
+    file_name = file.path
+    text = File.read(
+        file_name,
+        {encoding: 'bom|utf-8'}
+    )
+    CSV.parse(text, headers:true, ) do |row|
       if row['Id'] != nil and row['Run1'] != nil and row['Run2'] != nil
         time_entry = TimeEntry.new
         time_entry.week_id = week_id
